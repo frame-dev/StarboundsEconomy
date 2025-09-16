@@ -9,6 +9,10 @@ A simple Minecraft economy plugin with Vault support.
 - Vault integration for compatibility with other plugins
 - PostgreSQL database support
 
+## Information
+
+File Storage has been added for those who do not wish to use PostgreSQL.
+
 ## Installation
 
 1. Download the plugin JAR and place it in your server's `plugins` folder.
