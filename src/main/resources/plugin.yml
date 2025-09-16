@@ -8,6 +8,9 @@ depends:
   - Vault
 
 commands:
+  pay:
+    description: Pay another player
+    usage: /pay <player> <amount>
   balance:
     description: Check your balance
     usage: /balance [player]

@@ -8,6 +8,7 @@ public final class StarboundsEconomy extends JavaPlugin {
     private static StarboundsEconomy instance;
 
     private Database database;
+    private Economy economy;
 
     public static final String PREFIX = "§8§l•● §f§lStarbounds §8§l┃ §7";
 
@@ -26,9 +27,11 @@ public final class StarboundsEconomy extends JavaPlugin {
         }
 
         this.getCommand("eco").setExecutor(new EcoCommand(database));
+        this.getCommand("pay").setExecutor(new PayCommand(database));
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         getServer().getServicesManager().register(Economy.class, new VaultEconomy(), this, org.bukkit.plugin.ServicePriority.High);
+        economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
         getLogger().info("StarboundsEconomy has been enabled!");
     }
 
@@ -43,5 +46,9 @@ public final class StarboundsEconomy extends JavaPlugin {
 
     public Database getDatabaseSQL() {
         return database;
+    }
+
+    public Economy getEconomy() {
+        return economy;
     }
 }

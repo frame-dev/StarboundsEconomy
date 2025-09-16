@@ -7,6 +7,7 @@ A simple Minecraft economy plugin with Vault support.
 - Check your own or others' balances
 - Set player balances (with permission)
 - Vault integration for compatibility with other plugins
+- PostgreSQL database support
 
 ## Installation
 
@@ -18,6 +19,7 @@ A simple Minecraft economy plugin with Vault support.
 
 - `/balance [player]` — Check your own or another player's balance
 - `/eco set <amount> <player>` — Main command for balance checking
+- `/pay <player> <amount>` — Pay another player
 
 ## Permissions
 
