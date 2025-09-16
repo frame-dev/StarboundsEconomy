@@ -1,7 +1,7 @@
 package ch.framedev.starboundsEconomy.commands;
 
-import ch.framedev.starboundsEconomy.utils.Database;
 import ch.framedev.starboundsEconomy.StarboundsEconomy;
+import ch.framedev.starboundsEconomy.utils.DatabaseHelper;
 import ch.framedev.starboundsEconomy.utils.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -14,9 +14,9 @@ import java.util.UUID;
 
 public class PayCommand implements CommandExecutor {
 
-    private final Database database;
+    private final DatabaseHelper database;
 
-    public PayCommand(Database database) {
+    public PayCommand(DatabaseHelper database) {
         this.database = database;
     }
 

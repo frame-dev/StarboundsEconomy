@@ -2,10 +2,12 @@ name: StarboundsEconomy
 version: '1.0-SNAPSHOT'
 main: ch.framedev.starboundsEconomy.StarboundsEconomy
 author: framedev
-description: Economy plugin for Minecraft with Vault support.
+description: A simple economy plugin for the Starbound server.
 
-depends:
+depend:
   - Vault
+
+website: https://github.com/frame-dev/StarboundsEconomy
 
 commands:
   pay:

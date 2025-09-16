@@ -11,7 +11,12 @@ public class ConfigUtils {
         plugin.saveConfig();
 
         FileConfiguration config = plugin.getConfig();
-        if(!config.contains("database")) {
+        if (!config.contains("use_database")) {
+            config.set("use_database", false);
+            plugin.saveConfig();
+        }
+
+        if (!config.contains("database")) {
             ConfigurationSection database = config.createSection("database");
             database.set("host", "localhost");
             database.set("port", 5432);
@@ -25,8 +30,10 @@ public class ConfigUtils {
 
     private void setupMessages(StarboundsEconomy plugin) {
         FileConfiguration config = plugin.getConfig();
-        if(!config.contains("messages")) {
+        if (!config.contains("messages")) {
+            // Default messages
             ConfigurationSection messages = config.createSection("messages");
+            // General messages
             messages.set("only_player", "&cDieser Befehl kann nur von einem Spieler ausgeführt werden.");
             messages.set("no_permission", "&cDu hast keine Berechtigung, diesen Befehl auszuführen.");
             messages.set("player_not_found", "&cSpieler nicht gefunden.");
@@ -36,10 +43,12 @@ public class ConfigUtils {
             messages.set("invalid_amount", "&cBitte gib einen gültigen Betrag an.");
             messages.set("amount_positive", "&cDer Betrag muss positiv sein.");
             messages.set("insufficient_funds", "&cDu hast nicht genügend Guthaben.");
+            messages.set("starting_balance", 100); // Default starting balance
 
+            // Command-specific messages
+            messages.set("usage_balance", "&cVerwendung: /eco balance [Spieler]");
             messages.set("balance_info", "&aDein Kontostand beträgt: &e{balance} ★");
             messages.set("balance_info_other", "&aDer Kontostand von &e{player} &abeträgt: &e{balance} ★");
-            messages.set("usage_balance", "&cVerwendung: /eco balance [Spieler]");
 
             messages.set("usage_pay", "&cVerwendung: /pay <Spieler> <Betrag>");
             messages.set("pay_self", "&cDu kannst dir selbst kein Geld schicken.");

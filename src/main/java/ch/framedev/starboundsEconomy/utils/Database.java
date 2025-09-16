@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class Database {
+public class Database implements DatabaseHelper {
 
     private final String TABLE_NAME = "economy";
     private final String COLUMN_UUID = "uuid";
@@ -28,6 +28,7 @@ public class Database {
         }
     }
 
+    @Override
     public boolean insertPlayer(UUID uuid) {
         String sql = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_UUID + ", " + COLUMN_BALANCE + ") VALUES (?, ?)";
         try (Connection conn = PostgreSQL.getConnection();
