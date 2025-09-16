@@ -1,8 +1,11 @@
 name: StarboundsEconomy
 version: '1.0-SNAPSHOT'
 main: ch.framedev.starboundsEconomy.StarboundsEconomy
+author: framedev
+description: Economy plugin for Minecraft with Vault support.
 
-depends: [Vault]
+depends:
+  - Vault
 
 commands:
   balance:
@@ -12,3 +15,14 @@ commands:
     description: Main command for StarboundsEconomy
     usage: /eco <subcommand> [args]
     aliases: [economy, money]
+
+permissions:
+  starboundseconomy.balance:
+    description: Allows the player to check their balance
+    default: true
+  starboundseconomy.balance.others:
+    description: Allows the player to check others' balances
+    default: op
+  starboundseconomy.set:
+    description: Allows the player to set another player's balance
+    default: op
