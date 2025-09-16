@@ -1,10 +1,13 @@
 package ch.framedev.starboundsEconomy.utils;
 
+import ch.framedev.starboundsEconomy.StarboundsEconomy;
+
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class UUIDFetcher {
 
@@ -32,7 +35,7 @@ public class UUIDFetcher {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not fetch UUID for player " + name, e);
         }
         return null;
     }

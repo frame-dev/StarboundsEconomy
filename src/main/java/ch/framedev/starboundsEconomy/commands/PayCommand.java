@@ -23,11 +23,15 @@ public class PayCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "Only players can use this command.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.only_player", "&cNur Spieler können diesen Befehl ausführen.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
         if (args.length != 2) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "Usage: /pay <player> <amount>");
+            String usagePay = StarboundsEconomy.getInstance().getConfig().getString("messages.usage_pay", "&cVerwendung: /pay <Spieler> <Betrag>");
+            usagePay = usagePay.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + usagePay);
             return true;
         }
 
@@ -38,48 +42,67 @@ public class PayCommand implements CommandExecutor {
         try {
             amount = Double.parseDouble(args[1]);
             if (amount <= 0) {
-                sender.sendMessage(StarboundsEconomy.PREFIX + "Amount must be positive.");
+                String message = StarboundsEconomy.getInstance().getConfig().getString("messages.amount_positive", "&cDer Betrag muss positiv sein.");
+                message = message.replace("&", "§");
+                sender.sendMessage(StarboundsEconomy.PREFIX + message);
                 return true;
             }
         } catch (NumberFormatException e) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "Invalid amount.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.invalid_amount", "&cBitte gib einen gültigen Betrag an.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         if (!database.playerExists(player.getUniqueId())) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "You do not have an account.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.player_self_no_account", "&cDu hast kein Konto. Bitte kontaktiere einen Administrator.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         UUID targetUUID = UUIDFetcher.getUUID(targetName);
         if (targetUUID == null) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "Player not found.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.player_not_found", "&cSpieler nicht gefunden.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         if (player.getUniqueId().equals(targetUUID)) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "You cannot pay yourself.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.pay_self", "&cDu kannst dir selbst kein Geld schicken.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(targetUUID);
         if (!database.playerExists(targetUUID)) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "Player not found.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.player_no_account", "&cDer Spieler &e{player} &chat kein Konto.");
+            message = message.replace("&", "§").replace("{player}", targetName);
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         double senderBalance = database.getBalance(player.getUniqueId());
         if (senderBalance < amount) {
-            sender.sendMessage(StarboundsEconomy.PREFIX + "You do not have enough funds.");
+            String message = StarboundsEconomy.getInstance().getConfig().getString("messages.insufficient_funds", "&cDu hast nicht genügend Guthaben.");
+            message = message.replace("&", "§");
+            sender.sendMessage(StarboundsEconomy.PREFIX + message);
             return true;
         }
 
         StarboundsEconomy.getInstance().getEconomy().withdrawPlayer(player, amount);
         StarboundsEconomy.getInstance().getEconomy().depositPlayer(target, amount);
 
-        sender.sendMessage(StarboundsEconomy.PREFIX + "You have paid " + targetName + " §a$" + amount);
+        String message = StarboundsEconomy.getInstance().getConfig().getString("messages.pay_success_sender", "&aDu hast &e{amount} ★ &aan &e{player} &agesendet.");
+        message = message.replace("&", "§").replace("{amount}", String.valueOf(amount)).replace("{player}", targetName);
+        sender.sendMessage(StarboundsEconomy.PREFIX + message);
         if (target.isOnline() && target.getPlayer() != null) {
-            target.getPlayer().sendMessage(StarboundsEconomy.PREFIX + "You have received §a$" + amount + " §7from " + player.getName());
+            String messageReceiver = StarboundsEconomy.getInstance().getConfig().getString("messages.pay_other", "&aDu hast von &e{player} {amount} ★ &abekommen.");
+            messageReceiver = messageReceiver.replace("{player}", player.getName()).replace("{amount}", String.valueOf(amount));
+            messageReceiver = messageReceiver.replace("&", "§");
+            target.getPlayer().sendMessage(StarboundsEconomy.PREFIX + messageReceiver);
         }
         return true;
     }
