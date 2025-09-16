@@ -12,7 +12,7 @@ public class ConfigUtils {
 
         FileConfiguration config = plugin.getConfig();
         if (!config.contains("use_database")) {
-            config.options().header("Set to true to use a PostgreSQL database, false to use a local file database.");
+            config.options().header("use_database | set to true to use a PostgreSQL database, false to use a local file database.");
             config.set("use_database", false);
             plugin.saveConfig();
         }
