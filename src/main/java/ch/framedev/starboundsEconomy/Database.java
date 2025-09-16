@@ -2,6 +2,8 @@ package ch.framedev.starboundsEconomy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -19,7 +21,7 @@ public class Database {
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not create table " + TABLE_NAME, e);
         }
     }
@@ -32,7 +34,7 @@ public class Database {
             pstmt.setInt(2, 0);
             pstmt.executeUpdate();
             return true;
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not insert player " + uuid, e);
             return false;
         }
@@ -43,10 +45,10 @@ public class Database {
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, uuid.toString());
-            try (java.sql.ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 return rs.next();
             }
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not check if player exists " + uuid, e);
             return false;
         }
@@ -60,7 +62,7 @@ public class Database {
             pstmt.setString(2, uuid.toString());
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not set balance for player " + uuid, e);
             return false;
         }
@@ -71,14 +73,14 @@ public class Database {
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, uuid.toString());
-            try (java.sql.ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getDouble(COLUMN_BALANCE);
                 } else {
                     return 0.0;
                 }
             }
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not get balance for player " + uuid, e);
             return 0.0;
         }
