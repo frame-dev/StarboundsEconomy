@@ -23,6 +23,7 @@ public final class StarboundsEconomy extends JavaPlugin {
         }
 
         this.getCommand("eco").setExecutor(new EcoCommand(database));
+        getServer().getPluginManager().registerEvents(new Events(), this);
 
         getServer().getServicesManager().register(Economy.class, new VaultEconomy(), this, org.bukkit.plugin.ServicePriority.High);
         getLogger().info("StarboundsEconomy has been enabled!");

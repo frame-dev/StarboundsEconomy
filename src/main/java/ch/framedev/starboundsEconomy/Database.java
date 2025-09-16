@@ -3,6 +3,7 @@ package ch.framedev.starboundsEconomy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class Database {
 
@@ -19,7 +20,7 @@ public class Database {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
         } catch (java.sql.SQLException e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not create table " + TABLE_NAME, e);
         }
     }
 
@@ -32,7 +33,7 @@ public class Database {
             pstmt.executeUpdate();
             return true;
         } catch (java.sql.SQLException e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not insert player " + uuid, e);
             return false;
         }
     }
@@ -46,7 +47,7 @@ public class Database {
                 return rs.next();
             }
         } catch (java.sql.SQLException e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not check if player exists " + uuid, e);
             return false;
         }
     }
@@ -60,7 +61,7 @@ public class Database {
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
         } catch (java.sql.SQLException e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not set balance for player " + uuid, e);
             return false;
         }
     }
@@ -78,7 +79,7 @@ public class Database {
                 }
             }
         } catch (java.sql.SQLException e) {
-            e.printStackTrace();
+            StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not get balance for player " + uuid, e);
             return 0.0;
         }
     }
