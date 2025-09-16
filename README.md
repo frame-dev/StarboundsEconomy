@@ -22,6 +22,8 @@ A simple Minecraft economy plugin with Vault support.
 - `/eco set <amount> <player>` — Main command for balance checking
 - `/pay <player> <amount>` — Pay another player
 
+[] means optional, <> means required.
+
 ## **Permissions**
 
 - `starboundseconomy.balance` — Check your own balance (default: true)
