@@ -14,8 +14,11 @@ public final class StarboundsEconomy extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
         this.database = new Database();
+
         new ConfigUtils(this);
+
         if(getServer().getPluginManager().getPlugin("Vault") == null) {
             getLogger().severe("Vault plugin not found! Disabling StarboundsEconomy.");
             getServer().getPluginManager().disablePlugin(this);
@@ -31,7 +34,7 @@ public final class StarboundsEconomy extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        getLogger().info("StarboundsEconomy has been disabled!");
     }
 
     public static StarboundsEconomy getInstance() {
