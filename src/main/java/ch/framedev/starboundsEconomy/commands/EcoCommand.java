@@ -1,5 +1,8 @@
-package ch.framedev.starboundsEconomy;
+package ch.framedev.starboundsEconomy.commands;
 
+import ch.framedev.starboundsEconomy.utils.Database;
+import ch.framedev.starboundsEconomy.StarboundsEconomy;
+import ch.framedev.starboundsEconomy.utils.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;

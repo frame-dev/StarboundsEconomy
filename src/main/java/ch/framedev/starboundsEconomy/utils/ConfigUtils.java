@@ -1,5 +1,6 @@
-package ch.framedev.starboundsEconomy;
+package ch.framedev.starboundsEconomy.utils;
 
+import ch.framedev.starboundsEconomy.StarboundsEconomy;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 

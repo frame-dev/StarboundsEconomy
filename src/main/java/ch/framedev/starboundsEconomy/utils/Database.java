@@ -1,4 +1,6 @@
-package ch.framedev.starboundsEconomy;
+package ch.framedev.starboundsEconomy.utils;
+
+import ch.framedev.starboundsEconomy.StarboundsEconomy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

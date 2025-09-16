@@ -1,5 +1,6 @@
-package ch.framedev.starboundsEconomy;
+package ch.framedev.starboundsEconomy.utils;
 
+import ch.framedev.starboundsEconomy.StarboundsEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
