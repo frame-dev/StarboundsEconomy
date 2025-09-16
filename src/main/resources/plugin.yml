@@ -1,0 +1,14 @@
+name: StarboundsEconomy
+version: '1.0-SNAPSHOT'
+main: ch.framedev.starboundsEconomy.StarboundsEconomy
+
+depends: [Vault]
+
+commands:
+  balance:
+    description: Check your balance
+    usage: /balance [player]
+  eco:
+    description: Main command for StarboundsEconomy
+    usage: /eco <subcommand> [args]
+    aliases: [economy, money]
