@@ -27,7 +27,16 @@ A simple Minecraft economy plugin with Vault support.
 
 ## Configuration
 
-No configuration required for basic usage.
+PostgreSQL configuration can be set in `config.yml`:
+
+```yaml
+database:
+  host: localhost
+  port: 5432
+  name: minecraft
+  user: yourusername
+  password: yourpassword
+```
 
 ## License
 
