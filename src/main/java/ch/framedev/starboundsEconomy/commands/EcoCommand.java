@@ -89,9 +89,9 @@ public class EcoCommand implements CommandExecutor {
                 sender.sendMessage(StarboundsEconomy.PREFIX + message);
                 return true;
             }
-            double amount;
+            int amount;
             try {
-                amount = Double.parseDouble(args[1]);
+                amount = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
                 String message = plugin.getConfig().getString("messages.invalid_amount", "&cBitte gib einen gültigen Betrag an.");
                 message = message.replace("&", "§");

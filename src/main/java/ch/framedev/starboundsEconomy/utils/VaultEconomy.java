@@ -142,7 +142,7 @@ public class VaultEconomy implements Economy {
         }
         UUID uuid = UUIDFetcher.getUUID(playerName);
         if (uuid != null) {
-            boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(uuid, currentBalance - amount);
+            boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(uuid, (int) (currentBalance - amount));
             if (success) {
                 return new EconomyResponse(amount, currentBalance - amount, EconomyResponse.ResponseType.SUCCESS, null);
             } else {
@@ -158,7 +158,7 @@ public class VaultEconomy implements Economy {
         if (currentBalance < amount) {
             return new EconomyResponse(0, currentBalance, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
         }
-        boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(player.getUniqueId(), currentBalance - amount);
+        boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(player.getUniqueId(), (int) (currentBalance - amount));
         if (success) {
             return new EconomyResponse(amount, currentBalance - amount, EconomyResponse.ResponseType.SUCCESS, null);
         } else {
@@ -181,7 +181,7 @@ public class VaultEconomy implements Economy {
         double currentBalance = getBalance(playerName);
         UUID uuid = UUIDFetcher.getUUID(playerName);
         if (uuid != null) {
-            boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(uuid, currentBalance + amount);
+            boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(uuid, (int) (currentBalance + amount));
             if (success) {
                 return new EconomyResponse(amount, currentBalance + amount, EconomyResponse.ResponseType.SUCCESS, null);
             } else {
@@ -194,7 +194,7 @@ public class VaultEconomy implements Economy {
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
         double currentBalance = getBalance(player);
-        boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(player.getUniqueId(), currentBalance + amount);
+        boolean success = StarboundsEconomy.getInstance().getDatabaseSQL().setBalance(player.getUniqueId(), (int) (currentBalance + amount));
         if (success) {
             return new EconomyResponse(amount, currentBalance + amount, EconomyResponse.ResponseType.SUCCESS, null);
         } else {

@@ -37,10 +37,10 @@ public class PayCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         String targetName = args[0];
-        double amount;
+        int amount;
 
         try {
-            amount = Double.parseDouble(args[1]);
+            amount = Integer.parseInt(args[1]);
             if (amount <= 0) {
                 String message = StarboundsEconomy.getInstance().getConfig().getString("messages.amount_positive", "&cDer Betrag muss positiv sein.");
                 message = message.replace("&", "§");

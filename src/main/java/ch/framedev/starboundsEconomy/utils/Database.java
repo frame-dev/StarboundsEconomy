@@ -18,7 +18,7 @@ public class Database {
     public Database() {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 COLUMN_UUID + " VARCHAR(36) PRIMARY KEY," +
-                COLUMN_BALANCE + " DOUBLE DEFAULT 0.0" +
+                COLUMN_BALANCE + " INTEGER DEFAULT 0" +
                 ")";
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -56,11 +56,11 @@ public class Database {
         }
     }
 
-    public boolean setBalance(UUID uuid, double amount) {
+    public boolean setBalance(UUID uuid, int amount) {
         String sql = "UPDATE " + TABLE_NAME + " SET " + COLUMN_BALANCE + " = ? WHERE " + COLUMN_UUID + " = ?";
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setDouble(1, amount);
+            pstmt.setInt(1, amount);
             pstmt.setString(2, uuid.toString());
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
@@ -70,21 +70,21 @@ public class Database {
         }
     }
 
-    public double getBalance(UUID uuid) {
+    public int getBalance(UUID uuid) {
         String sql = "SELECT " + COLUMN_BALANCE + " FROM " + TABLE_NAME + " WHERE " + COLUMN_UUID + " = ?";
         try (Connection conn = PostgreSQL.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, uuid.toString());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getDouble(COLUMN_BALANCE);
+                    return rs.getInt(COLUMN_BALANCE);
                 } else {
-                    return 0.0;
+                    return 0;
                 }
             }
         } catch (SQLException e) {
             StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not get balance for player " + uuid, e);
-            return 0.0;
+            return 0;
         }
     }
 }
