@@ -30,4 +30,4 @@ A simple Minecraft economy plugin with Vault support.
 
 ## **License**
 
-MIT
+This project is licensed under the GNU 3.0 License. See the `LICENSE` file for details.

@@ -16,6 +16,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <licenses>
+        <license>
+            <name>GNU 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+            <comments>A copy of the license is included in the project</comments>
+        </license>
+    </licenses>
+
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
