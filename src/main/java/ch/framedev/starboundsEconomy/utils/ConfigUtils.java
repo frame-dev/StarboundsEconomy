@@ -41,7 +41,6 @@ public class ConfigUtils {
             messages.set("balance_info_other", "&aDer Kontostand von &e{player} &abeträgt: &e{balance} ★");
             messages.set("usage_balance", "&cVerwendung: /eco balance [Spieler]");
 
-
             messages.set("usage_pay", "&cVerwendung: /pay <Spieler> <Betrag>");
             messages.set("pay_self", "&cDu kannst dir selbst kein Geld schicken.");
             messages.set("pay_success_sender", "&aDu hast &e{amount} ★ &aan &e{player} &agesendet.");
