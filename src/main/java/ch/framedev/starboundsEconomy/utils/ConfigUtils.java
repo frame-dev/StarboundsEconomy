@@ -45,6 +45,9 @@ public class ConfigUtils {
             messages.set("insufficient_funds", "&cDu hast nicht genügend Guthaben.");
             messages.set("starting_balance", 100); // Default starting balance
 
+            messages.set("usage_starboundseconomy", "&cVerwendung: /starboundseconomy reload");
+            messages.set("reload_success", "&aKonfiguration erfolgreich neu geladen.");
+
             // Command-specific messages
             messages.set("usage_balance", "&cVerwendung: /eco balance [Spieler]");
             messages.set("balance_info", "&aDein Kontostand beträgt: &e{balance} ★");

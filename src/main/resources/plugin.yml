@@ -20,6 +20,10 @@ commands:
     description: Main command for StarboundsEconomy
     usage: /eco <subcommand> [args]
     aliases: [economy, money]
+  starboundseconomy:
+    description: Main command for StarboundsEconomy
+    usage: /starboundseconomy <subcommand> [args]
+    aliases: [sbe, sbeconomy]
 
 permissions:
   starboundseconomy.balance:

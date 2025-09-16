@@ -88,4 +88,9 @@ public class Database implements DatabaseHelper {
             return 0;
         }
     }
+
+    @Override
+    public void reload() {
+        // No action needed for SQL database
+    }
 }

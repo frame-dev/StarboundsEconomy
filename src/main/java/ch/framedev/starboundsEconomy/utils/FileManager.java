@@ -14,18 +14,23 @@ import java.util.logging.Level;
 public class FileManager implements DatabaseHelper {
 
     private final File file;
-    private final FileConfiguration config;
+    private FileConfiguration config;
 
     public FileManager() {
         this.file = new File(StarboundsEconomy.getInstance().getDataFolder(), "economy.yml");
         if (!file.exists()) {
             try {
-                if(!file.createNewFile())
+                if (!file.createNewFile())
                     StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not create economy.yml");
             } catch (IOException e) {
                 StarboundsEconomy.getInstance().getLogger().log(Level.SEVERE, "Could not create economy.yml", e);
             }
         }
+        this.config = YamlConfiguration.loadConfiguration(file);
+    }
+
+    @Override
+    public void reload() {
         this.config = YamlConfiguration.loadConfiguration(file);
     }
 

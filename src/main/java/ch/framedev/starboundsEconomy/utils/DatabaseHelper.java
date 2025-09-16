@@ -8,4 +8,5 @@ public interface DatabaseHelper {
     int getBalance(UUID uuid);
     boolean playerExists(UUID uuid);
     boolean insertPlayer(UUID uuid);
+    void reload();
 }
